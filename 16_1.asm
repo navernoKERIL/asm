@@ -5,8 +5,6 @@ section .data
     b dd 3              
     c dd 0              
 
-    label dd summ
-
 section .text
     global _start
 
@@ -15,8 +13,8 @@ _start:
     mov ebx, [b]
 
     mov edx, skip
-    jmp [label]
-    skip:
+    jmp summ
+skip:
     
     mov eax, [c]        
     SIGNINT eax         

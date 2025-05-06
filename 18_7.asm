@@ -1,28 +1,29 @@
 %include "st_io.inc"
 
 section .data
-    S1 db "abcdefgh", 0   
+    S1 db "abcd*efgh", 0   
     len equ $ - S1
 section .text
     global _start
 
-_start:
-    mov ecx, len          
-    mov edi, S1          
-search_loop:
-    mov al, [edi]        
-    cmp al, '*'           
-    je found             
-    inc edi               
-    loop search_loop    
+_start:    
+    cld
+    mov edi, S1 
+    mov al, '*'  
+    mov ecx, len
+    repne scasb     
 
-    PRINT "NO '*'"
+    jne not_found
+    
+    mov byte [edi-1], '+'
+    jmp print_result
+
+not_found:
+    PRINT "no '*'"
     PUTCHAR 10
-    jmp end
+    FINISH
 
-found:
-    mov byte [edi], '+'  
-
+print_result:
     mov eax, 4          
     mov ebx, 1          
     mov ecx, S1          
@@ -30,7 +31,6 @@ found:
     int 0x80
     
     PUTCHAR 10
-
-end:
     FINISH
+
               

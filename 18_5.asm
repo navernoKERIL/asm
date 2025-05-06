@@ -10,11 +10,11 @@ section .text
 
 _start:
 
-    mov esi, A + 12
-    mov edi, B + 12
-    mov ecx, 4
-    cld
-    rep movsw
+    mov esi, A + 18
+    mov edi, B + 18  
+    mov ecx, 4         
+    std                  
+    rep movsw 
 
     mov ecx, [len]
     lea esi, A
