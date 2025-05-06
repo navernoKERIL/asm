@@ -4,5 +4,4 @@
 !*.h
 !*.txt
 !*.inc
-!*.gitignore
 !Makefile
